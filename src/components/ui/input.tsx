@@ -45,8 +45,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               ref={ref}
               className={`${
                 additionalClasses
-                  ? additionalClasses + "w-full text-base"
-                  : "w-full rounded-md border border-gray-200 bg-transparent px-4 py-4 text-base font-light focus:ring-1 ring-black outline-none"
+                  ? additionalClasses +
+                    "w-full text-base bg-transparent rounded-md border border-gray-200 px-4 py-3 focus:ring-1 ring-primary-50 outline-none"
+                  : "w-full rounded-[16px] bg-[#2E2E2E]  px-4 py-3 text-base font-light focus:ring-1 ring-primary-50 outline-none"
               }`}
               type={!visible ? type : "text"}
               required={required}
@@ -61,7 +62,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               {...additionalAttributes}
             />
             {password && (
-              <i className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center text-black">
+              <i className="absolute right-4 top-1/2 flex -translate-y-1/2 items-center text-accent-50">
                 <button
                   type="button"
                   onClick={() => setVisible(!visible)}
@@ -70,7 +71,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                   <span className="sr-only">
                     {visible ? "Hide password" : "Show password"}
                   </span>
-                  {visible ? <Eye /> : <EyeOff />}
+                  {visible ? <Eye size={20} /> : <EyeOff size={20} />}
                 </button>
               </i>
             )}

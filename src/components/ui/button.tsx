@@ -5,6 +5,7 @@ export function Button({
   className,
   onClick,
   disabled,
+  type,
   ...props
 }: ButtonProps) {
   return (
@@ -15,8 +16,8 @@ export function Button({
       }}
       disabled={disabled}
       {...props}
-      type="submit"
-      className={`${className} rounded-md font-medium text-center disabled:hover:bg-opacity-100 hover:bg-opacity-85 transition-all duration-300 text-[16px] w-full py-3 px-4`}
+      type={type}
+      className={`${className} outline-hidden font-medium text-center disabled:hover:bg-opacity-100 hover:bg-opacity-85 transition-all duration-300 text-[16px] w-full py-3 px-4`}
     >
       {children}
     </button>

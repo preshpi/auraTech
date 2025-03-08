@@ -7,4 +7,4 @@ export const logInSchema = z.object({
     .min(10, "Password must be at least 10 characters"),
 });
 
-export type TsignInSchema = z.infer<typeof logInSchema>;
+export type TlogInSchema = z.infer<typeof logInSchema>;
