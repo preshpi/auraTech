@@ -37,3 +37,20 @@ export type SectionProductsProp = {
   title: string;
   _id: string;
 };
+
+export type PriceRange = {
+  min: number;
+  max: number;
+};
+
+export type filterDataProp = {
+  color?: string;
+  targetPrice?: number;
+  priceComparison?: string;
+  priceRange?: PriceRange;
+};
+
+export type CatFilterPrice = {
+  color: string;
+  price: number | null;
+};

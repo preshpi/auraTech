@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ProductProp } from "../../types/main/product";
+import { ProductProp } from "../../../types/main/product";
 import Product from "./product";
 
 interface IProductsParentProps {
@@ -12,8 +12,6 @@ const ProductsParent: React.FunctionComponent<IProductsParentProps> = ({
   products,
   text,
 }) => {
-  console.log("products", products);
-
   return (
     <div className="w-full">
       <h3 className="text-left font-medium mb-3 text-black text-[39px]">

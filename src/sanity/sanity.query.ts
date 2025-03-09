@@ -69,3 +69,57 @@ export const getBestSellers = async () => {
     return [];
   }
 };
+
+//Get All Products
+export const getAllProducts = async () => {
+  const query = `*[_type == "product"] | order(_createdAt desc)${productQuery}`;
+
+  try {
+    const products = await client.fetch(query);
+    return products;
+  } catch (error) {
+    toast.error((error as { message: string }).message);
+    return [];
+  }
+};
+
+//Get Product Colors
+export const getProductColors = async () => {
+  const query = `*[_type == "color"]{
+  _id, title
+  }`;
+
+  try {
+    const colors = await client.fetch(query);
+    return colors;
+  } catch (error) {
+    toast.error((error as { message: string }).message);
+    return [];
+  }
+};
+
+// Get solo product
+export const getSoloProduct = async (product_id: string | undefined) => {
+  const query = `*[_type == "product" && _id == '${product_id}'][0]${productQuery}`;
+
+  try {
+    const soloProduct = await client.fetch(query);
+    return soloProduct;
+  } catch (error) {
+    toast.error((error as { message: string }).message);
+    return [];
+  }
+};
+
+// Get similar products
+export const getSimilarProducts = async (categoryName: string | undefined) => {
+  const query = `*[_type == "product" &&  references(*[_type == "category" && name == '${categoryName}']._id)][0...5]${productQuery}`;
+
+  try {
+    const similarProducts = await client.fetch(query);
+    return similarProducts;
+  } catch (error) {
+    toast.error((error as { message: string }).message);
+    return [];
+  }
+};

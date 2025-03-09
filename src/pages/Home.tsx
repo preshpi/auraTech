@@ -1,35 +1,27 @@
-import { useEffect, useState } from "react";
-import Categories from "../components/landing/categories";
-import Hero from "../components/landing/hero";
-import Navbar from "../components/layout/navbar";
+import { useQuery } from "react-query";
 import { getBestSellers, getCategories } from "../sanity/sanity.query";
-import BestSellers from "../components/landing/bestSellers";
 import { CategoryProp, SectionProductsProp } from "../types/main/product";
+import Hero from "../components/Views/landing/hero";
+import BestSellers from "../components/Views/landing/bestSellers";
+import Categories from "../components/Views/landing/categories";
 
 const Home = () => {
-  const [categoryData, setCategoryData] = useState<CategoryProp[]>([]);
-  const [bestSellerData, setBestSellerData] = useState<SectionProductsProp>();
-  useEffect(() => {
-    const fetchData = async () => {
-      const categories = await getCategories();
-      setCategoryData(categories);
+  const { data: categories = [], isLoading: categoriesLoading } = useQuery<
+    CategoryProp[]
+  >("categories", getCategories);
 
-      const bestSellers = await getBestSellers();
-      setBestSellerData(bestSellers);
-    };
-
-    fetchData();
-  }, []);
+  const { data: bestSellers, isLoading: bestSellersLoading } =
+    useQuery<SectionProductsProp>("bestSellers", getBestSellers);
 
   return (
     <div className="min-h-screen flex flex-col px-12 bg-[#fff]">
-      <Navbar />
       <Hero />
-      <Categories categoryData={categoryData} />
-      {bestSellerData && (
+      <Categories categoryData={categories} isLoading={categoriesLoading} />
+      {bestSellers && (
         <BestSellers
-          text={bestSellerData.title}
-          productsArr={bestSellerData.products}
+          text={bestSellers.title}
+          productsArr={bestSellers.products}
+          isLoading={bestSellersLoading}
         />
       )}
     </div>

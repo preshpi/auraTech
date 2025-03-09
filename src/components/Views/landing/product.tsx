@@ -1,15 +1,15 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ProductProp } from "../../types/main/product";
-import { urlFor } from "../../sanity/sanity";
-import NoImage from "../general/NoImage";
-import { useUserAuth } from "../../context/Auth.Context";
+import { ProductProp } from "../../../types/main/product";
+import { urlFor } from "../../../sanity/sanity";
+import NoImage from "../../general/NoImage";
+import { useUserAuth } from "../../../context/Auth.Context";
 import { FiShoppingBag } from "react-icons/fi";
 import { CiShoppingCart } from "react-icons/ci";
 import { toast } from "sonner";
-import { useAppDispatch } from "../../hooks/redux.hook";
-import { handleAddToCart } from "../../redux/slices/cartSlice";
+import { useAppDispatch } from "../../../hooks/redux.hook";
+import { handleAddToCart } from "../../../redux/slices/cartSlice";
 import Cookies from "js-cookie";
-import { config } from "../../helper/config";
+import { config } from "../../../helper/config";
 
 interface IProductProps {
   productData: ProductProp;
@@ -20,7 +20,6 @@ const buttonStyles =
   "w-[40px] h-[40px] rounded-full bg-[#eee] bg-opacity-80 text-lg flex items-center justify-center cursor-pointer";
 
 const Product = ({ productData }: IProductProps) => {
-  console.log("productData", productData);
   const { user } = useUserAuth();
   const dispatch = useAppDispatch();
   const router = useNavigate();
