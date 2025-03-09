@@ -18,7 +18,7 @@ const SoloContent: React.FunctionComponent<ISoloContentProps> = ({
   const router = useNavigate();
 
   return (
-    <div className="w-full h-full  mx-auto max-w-[1240px] px-5 lg:px-20">
+    <div className="w-full h-full py-10  mx-auto max-w-[1240px] px-5 lg:px-20">
       {soloProductData === null ? (
         <div className="max-w-[500px] mx-auto h-[60vh] flex-col gap-5 flex items-center justify-center">
           <img
@@ -56,7 +56,7 @@ const SoloContent: React.FunctionComponent<ISoloContentProps> = ({
       ) : (
         <>
           {/* Link Direction  */}
-          <div className="py-10 flex gap-x-3 items-center">
+          <div className="flex gap-x-3 items-center">
             <SoloTop
               product_name={soloProductData.product_name}
               category={soloProductData.categories[0].slug.current}

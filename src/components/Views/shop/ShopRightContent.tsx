@@ -11,12 +11,17 @@ import Empty from "../../general/Empty";
 import { CategoryProp } from "../../../types/main/product";
 import { Link } from "react-router-dom";
 import { Button } from "../../ui/button";
+import SkeletonProductGrid from "../soloProduct/SkeletonLoader";
 
 interface IShopRightContentProp {
   categoryArr: CategoryProp[];
+  isLoading: boolean;
 }
 
-const ShopRightContent: React.FC<IShopRightContentProp> = ({ categoryArr }) => {
+const ShopRightContent: React.FC<IShopRightContentProp> = ({
+  categoryArr,
+  isLoading,
+}) => {
   // HOOKS
   const [showSortBy, setShowSortBy] = React.useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,7 +66,7 @@ const ShopRightContent: React.FC<IShopRightContentProp> = ({ categoryArr }) => {
   );
 
   return (
-    <div className="w-full h-full lg:px-6">
+    <div className="w-full h-full lg:px-3">
       {/* Link Direction  */}
       <div className="flex gap-x-2 my-10 items-center flex-wrap lg:px-5">
         <div className="flex gap-x-3 items-center">
@@ -134,7 +139,7 @@ const ShopRightContent: React.FC<IShopRightContentProp> = ({ categoryArr }) => {
           </button>
 
           {showSortBy && (
-            <div className="lg:w-[55%] w-full duration-300 absolute lg:right-[60px] top-16 border-gray-100 bg-white rounded-br-lg rounded-bl-lg shadow-md divide-y divide-gray-200">
+            <div className="lg:w-[55%] w-full duration-300 absolute lg:right-[60px] top-16 border-gray-100 bg-white rounded-br-lg rounded-bl-lg shadow-md divide-y divide-gray-200 z-20">
               {sortingArr?.map(({ id, text, value }) => (
                 <button
                   className="capitalize text-sm w-full text-left text-black px-5 py-4"
@@ -218,9 +223,11 @@ const ShopRightContent: React.FC<IShopRightContentProp> = ({ categoryArr }) => {
               )}
             </div>
           </div>
+        ) : isLoading ? (
+          <SkeletonProductGrid />
         ) : (
           <>
-            <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+            <div className="w-full grid md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6">
               {paginatedProducts.map((item, index) => (
                 <Product key={index} productData={item} />
               ))}

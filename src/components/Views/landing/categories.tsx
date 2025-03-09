@@ -4,6 +4,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useEmblaCarousel from "embla-carousel-react";
 import { CategoryProp } from "../../../types/main/product";
+import { SkeletonCategory } from "../soloProduct/SkeletonLoader";
 
 interface ITopCategoriesProp {
   categoryData: CategoryProp[];
@@ -11,7 +12,7 @@ interface ITopCategoriesProp {
 }
 
 const Categories: React.FC<ITopCategoriesProp> = React.memo(
-  ({ categoryData }) => {
+  ({ categoryData, isLoading }) => {
     const [hovered, setHovered] = useState<string | null>(null);
     const [emblaRef, emblaApi] = useEmblaCarousel({
       align: "start",
@@ -54,40 +55,47 @@ const Categories: React.FC<ITopCategoriesProp> = React.memo(
       <div className="relative w-full mt-12">
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
-            {categoryData.map((category) => (
-              <div className="flex-shrink-0 w-[250px] mx-2" key={category._id}>
-                <Link
-                  to={`/shop?cat=${category.slug.current}`}
-                  onMouseEnter={() => setHovered(category._id)}
-                  onMouseLeave={() => setHovered(null)}
-                  className="flex flex-col group items-center justify-start bg-[#F9F9F9] rounded-md w-full p-4 h-[320px]"
-                >
-                  <img
-                    src={urlFor(category.image)}
-                    alt={category.name}
-                    className="w-full h-[200px] object-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
-                  />
+            {isLoading
+              ? Array.from({ length: 6 }).map((_, index) => (
+                  <SkeletonCategory key={index} />
+                ))
+              : categoryData.map((category) => (
+                  <div
+                    className="flex-shrink-0 w-[250px] mx-2"
+                    key={category._id}
+                  >
+                    <Link
+                      to={`/shop?cat=${category.slug.current}`}
+                      onMouseEnter={() => setHovered(category._id)}
+                      onMouseLeave={() => setHovered(null)}
+                      className="flex flex-col group items-center justify-start bg-[#F9F9F9] rounded-md w-full p-4 h-[320px]"
+                    >
+                      <img
+                        src={urlFor(category.image)}
+                        alt={category.name}
+                        className="w-full h-[200px] object-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                      />
 
-                  <div className="flex items-center justify-between w-full py-2">
-                    <div className="space-y-2">
-                      <p className="text-2xl font-medium heading reversed-link text-xl-3xl tracking-tighter leading-tight group-hover:underline">
-                        {category.name}
-                      </p>
-                      <p className="leading-none text-xs xl:text-sm">
-                        {category.description}
-                      </p>
-                    </div>
-                    <span className="transform transition-transform duration-300 ease-in-out">
-                      {hovered === category._id ? (
-                        <ArrowDown size={20} />
-                      ) : (
-                        <ArrowRight size={20} />
-                      )}
-                    </span>
+                      <div className="flex items-center justify-between w-full py-2">
+                        <div className="space-y-2">
+                          <p className="text-2xl font-medium heading reversed-link text-xl-3xl tracking-tighter leading-tight group-hover:underline">
+                            {category.name}
+                          </p>
+                          <p className="leading-none text-xs xl:text-sm">
+                            {category.description}
+                          </p>
+                        </div>
+                        <span className="transform transition-transform duration-300 ease-in-out">
+                          {hovered === category._id ? (
+                            <ArrowDown size={20} />
+                          ) : (
+                            <ArrowRight size={20} />
+                          )}
+                        </span>
+                      </div>
+                    </Link>
                   </div>
-                </Link>
-              </div>
-            ))}
+                ))}
           </div>
         </div>
 

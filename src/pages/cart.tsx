@@ -229,7 +229,7 @@ const Cart = () => {
               </div>
 
               {/* checkout */}
-              <div className="lg:w-2/5 w-full flex flex-col gap-5 p-5 sticky top-0 bg-gray-50 text-black border border-300">
+              <div className="lg:w-2/5 w-full flex flex-col gap-5 p-5 sticky top-0 bg-gray-50 text-black border border-100">
                 <div className="flex w-full justify-between">
                   <p className="font-semibold">Sub Total</p>
                   <NumberFormat

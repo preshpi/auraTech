@@ -8,12 +8,18 @@ interface BestSellerProps {
   isLoading: boolean;
 }
 
-const BestSellers = React.memo(({ productsArr, text }: BestSellerProps) => {
-  return (
-    <div className="py-12">
-      <ProductsParent products={productsArr} text={text} />
-    </div>
-  );
-});
+const BestSellers = React.memo(
+  ({ productsArr, isLoading, text }: BestSellerProps) => {
+    return (
+      <div className="py-12">
+        <ProductsParent
+          products={productsArr}
+          text={text}
+          isLoading={isLoading}
+        />
+      </div>
+    );
+  }
+);
 
 export default BestSellers;

@@ -9,6 +9,7 @@ import { useAppDispatch } from "../../../hooks/redux.hook";
 import { handleAddToCart } from "../../../redux/slices/cartSlice";
 import NumberFormat from "../../../helper/numberFormat";
 import { Button } from "../../ui/button";
+import { getColorCode } from "../../../helper/validationCheck";
 
 type Props = {
   productData: ProductProp;
@@ -147,7 +148,7 @@ const SoloRight = ({ productData }: Props) => {
                   >
                     <button
                       className={`w-full h-full rounded-full`}
-                      // style={{ backgroundColor: getColorCode(title) }}
+                      style={{ backgroundColor: getColorCode(title) }}
                       onClick={() => handleColor(title)}
                     ></button>
                   </div>

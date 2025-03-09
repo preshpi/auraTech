@@ -54,12 +54,7 @@ const SoloLeft = ({ mainImage, otherImages }: Props) => {
           >
             <div></div>
             {mainImage ? (
-              <img
-                src={urlFor(mainImage)}
-                alt={"product image"}
-                width={1000}
-                height={1000}
-              />
+              <img src={urlFor(mainImage)} alt={"product image"} />
             ) : (
               <NoImage />
             )}
@@ -89,14 +84,14 @@ const SoloLeft = ({ mainImage, otherImages }: Props) => {
         ))}
       </div>
 
-      <div className="w-full lg:w-[400px] h-[300px] lg:h-fit rounded-xl overflow-hidden relative">
+      <div className="w-full h-[300px] lg:h-fit rounded-xl overflow-hidden relative">
         {/* {activeImg.id === 0 ? ( */}
-        <div className=" w-full h-full relative">
+        <div className=" w-full h-full relative flex items-center justify-center">
           {activeImg.imageUrl && (
             <img
               src={urlFor(activeImg.imageUrl)}
               alt="other product"
-              className="object-cover w-fit h-[600px]"
+              className="object-cover w-fit h-fit max-h-[300px]"
             />
           )}
         </div>

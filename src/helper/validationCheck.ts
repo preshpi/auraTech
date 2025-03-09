@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import * as colorList from "color-name-list";
+import { colornames } from "color-name-list";
 
 export const getColorCode = (colorName: string): string => {
-  const color = colorList.find(
+  const color = colornames.find(
     (c: any) => c.name.toLowerCase() === colorName.toLowerCase()
   );
   return color ? color.hex : "#000000";

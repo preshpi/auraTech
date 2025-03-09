@@ -14,12 +14,18 @@ interface IShopContentProp {
   productsArr: ProductProp[];
   colorArr: ColorSizeProp[];
   categoryArr: CategoryProp[];
+  isLoading: boolean;
+  isColorLoading: boolean;
+  isCategoryLoading: boolean;
 }
 
 const ShopContent: React.FC<IShopContentProp> = ({
   productsArr,
   colorArr,
   categoryArr,
+  isLoading,
+  isColorLoading,
+  isCategoryLoading,
 }) => {
   // HOOKS
   const {
@@ -88,10 +94,15 @@ const ShopContent: React.FC<IShopContentProp> = ({
   }, [isOpenDialog, setIsOpenDialog]);
 
   return (
-    <div className="flex mx-auto max-w-[1140px] lg:p-10 ">
+    <div className="flex mx-auto max-w-[1240px] lg:p-10 ">
       {/* Left  */}
       <div className="hidden no-scrollbar lg:block fixed lg:sticky border-r  border-gray-300 w-[30%] h-full pb-10 overflow-y-auto">
-        <LeftFilterBar categoryArr={categoryArr} colorArr={colorArr} />
+        <LeftFilterBar
+          categoryArr={categoryArr}
+          colorArr={colorArr}
+          isColorLoading={isColorLoading}
+          isCategoryLoading={isCategoryLoading}
+        />
       </div>
 
       {/* Dialog */}
@@ -100,7 +111,12 @@ const ShopContent: React.FC<IShopContentProp> = ({
           ref={dialogRef}
           className="h-full overflow-auto  no-scrollbar border-slate-300 fixed bg-opacity-90 top-0 bg-slate-50 border-none backdrop-blur-md z-[99] w-[260px] shadow-md p-5"
         >
-          <LeftFilterBar categoryArr={categoryArr} colorArr={colorArr} />
+          <LeftFilterBar
+            categoryArr={categoryArr}
+            colorArr={colorArr}
+            isColorLoading={isColorLoading}
+            isCategoryLoading={isCategoryLoading}
+          />
         </div>
       )}
 
@@ -110,7 +126,7 @@ const ShopContent: React.FC<IShopContentProp> = ({
           isOpenDialog ? "blurred pointer-events-none" : ""
         }   h-full lg:px-0 px-6 flex w-full flex-col `}
       >
-        <ShopRightContent categoryArr={categoryArr} />
+        <ShopRightContent categoryArr={categoryArr} isLoading={isLoading} />
       </div>
     </div>
   );

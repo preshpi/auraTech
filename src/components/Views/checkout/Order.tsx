@@ -39,7 +39,7 @@ const Order = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6 py-6 max-w-[80%] w-full"
+      className="space-y-6 py-6 max-w-[90%] mx-auto w-full"
     >
       <div>
         <h3 className="text-lg font-semibold mb-4">Shipping Information</h3>

@@ -13,6 +13,8 @@ import { IoIosArrowDown } from "react-icons/io";
 interface ILeftFilterBarProps {
   colorArr: ColorSizeProp[];
   categoryArr: CategoryProp[];
+  isCategoryLoading: boolean;
+  isColorLoading: boolean;
 }
 
 const LeftFilterBar: React.FunctionComponent<ILeftFilterBarProps> = ({
