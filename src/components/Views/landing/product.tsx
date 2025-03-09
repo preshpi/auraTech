@@ -68,7 +68,7 @@ const Product = ({ productData }: IProductProps) => {
             <img
               src={urlFor(productData.imgUrl)}
               alt={productData.product_name}
-              className="object-cover h-fit max-h-[300px] w-fit rounded-md"
+              className="object-cover h-[300px]  w-fit rounded-md"
             />
           ) : (
             <NoImage />
