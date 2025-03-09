@@ -35,7 +35,7 @@ const ShopContent: React.FC<IShopContentProp> = ({
     isOpenDialog,
     setIsOpenDialog,
   } = useFilter();
-  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+  // const [, setIsVisible] = React.useState<boolean>(false);
   const dialogRef = React.useRef<HTMLDivElement>(null);
   const [searchParams] = useSearchParams();
 
@@ -56,21 +56,21 @@ const ShopContent: React.FC<IShopContentProp> = ({
     }
   }, [productsArr]);
 
-  React.useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 80) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
+  // React.useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (window.scrollY > 80) {
+  //       setIsVisible(true);
+  //     } else {
+  //       setIsVisible(false);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
 
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

@@ -8,12 +8,18 @@ interface NewArrivalProps {
   isLoading: boolean;
 }
 
-const NewArrival = React.memo(({ productsArr, text }: NewArrivalProps) => {
-  return (
-    <div className="py-12">
-      <ProductsParent products={productsArr} text={text} />
-    </div>
-  );
-});
+const NewArrival = React.memo(
+  ({ productsArr, text, isLoading }: NewArrivalProps) => {
+    return (
+      <div className="py-12">
+        <ProductsParent
+          products={productsArr}
+          text={text}
+          isLoading={isLoading}
+        />
+      </div>
+    );
+  }
+);
 
 export default NewArrival;
