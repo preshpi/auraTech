@@ -105,7 +105,7 @@ export const FilterContextProvider = ({
         break;
       }
       case "price": {
-        const { price, ...otherData3 } = filters;
+        const { ...otherData3 } = filters;
         setActiveFilter((prev) => ({ ...prev, price: null }));
         setFilters(otherData3);
         break;
