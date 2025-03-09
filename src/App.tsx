@@ -15,7 +15,7 @@ const Login = lazy(() => import("./pages/auth/login"));
 const Signup = lazy(() => import("./pages/auth/signup"));
 const NotFound = lazy(() => import("./pages/notFound"));
 const Checkout = lazy(() => import("./pages/checkout"));
-const Home = lazy(() => import("./pages/home"));
+const Home = lazy(() => import("./pages/HomePage"));
 const Cart = lazy(() => import("./pages/cart"));
 const Shop = lazy(() => import("./pages/shop"));
 const ProductDetails = lazy(
