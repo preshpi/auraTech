@@ -8,11 +8,12 @@ import SoloRight from "./SoloRight";
 
 interface ISoloContentProps {
   soloProductData: ProductProp;
-  similarProductData: ProductProp[];
+  isLoading: boolean;
 }
 
 const SoloContent: React.FunctionComponent<ISoloContentProps> = ({
   soloProductData,
+  isLoading,
 }) => {
   // HOOKS
   const router = useNavigate();
@@ -51,7 +52,7 @@ const SoloContent: React.FunctionComponent<ISoloContentProps> = ({
             </button>
           </div>
         </div>
-      ) : !soloProductData ? (
+      ) : isLoading ? (
         <MainPageSkeletonLoader />
       ) : (
         <>
