@@ -45,7 +45,6 @@ const LeftFilterBar: React.FunctionComponent<ILeftFilterBarProps> = ({
     activeFilter.price || null
   );
   const [showColor, setShowColor] = React.useState<boolean>(false);
-  const [showSize, setShowSize] = React.useState<boolean>(false);
   const [showPrice, setShowPrice] = React.useState<boolean>(false);
 
   // DECLARES
@@ -100,10 +99,6 @@ const LeftFilterBar: React.FunctionComponent<ILeftFilterBarProps> = ({
 
   const handleToggleColor = () => {
     setShowColor((prev) => !prev);
-  };
-
-  const handleToggleSize = () => {
-    setShowSize((prev) => !prev);
   };
 
   const handleTogglePrice = () => {
@@ -255,23 +250,6 @@ const LeftFilterBar: React.FunctionComponent<ILeftFilterBarProps> = ({
                 ))}
               </div>
             )}
-          </div>
-
-          {/* Sizes  */}
-          <div className="">
-            <div
-              className="mt-5 relative flex justify-between items-center cursor-pointer"
-              onClick={handleToggleSize}
-            >
-              <p className="text-sm font-bold capitalize">size</p>
-              <p
-                className={`${
-                  showSize ? "rotate-180" : "rotate-0"
-                } duration-300`}
-              >
-                <IoIosArrowDown />
-              </p>
-            </div>
           </div>
 
           {/* Prices  */}

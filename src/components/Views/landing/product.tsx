@@ -17,7 +17,7 @@ interface IProductProps {
 
 // STYLES
 const buttonStyles =
-  "w-[40px] h-[40px] rounded-full bg-[#eee] bg-opacity-80 text-lg flex items-center justify-center cursor-pointer";
+  "w-[40px] h-[40px] rounded-full bg-accent-200 opacity-80 text-lg flex items-center justify-center cursor-pointer";
 
 const Product = ({ productData }: IProductProps) => {
   const auth = getAuth();
@@ -60,7 +60,7 @@ const Product = ({ productData }: IProductProps) => {
   };
 
   return (
-    <div className="lg:w-[266px] w-full h-[full] relative lg:rounded-md overflow-hidden">
+    <div className="lg:w-[266px] w-full rounded-md mx-auto bg-[#f9f9f9] h-[full] relative lg:rounded-md overflow-hidden">
       {/* Image  */}
       <Link to={`/shop/${productData._id}`}>
         <div className="w-full h-[300px] overflow-hidden relative z-10 p-2">

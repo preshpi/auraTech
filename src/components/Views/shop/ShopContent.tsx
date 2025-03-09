@@ -88,36 +88,29 @@ const ShopContent: React.FC<IShopContentProp> = ({
   }, [isOpenDialog, setIsOpenDialog]);
 
   return (
-    <div>
-      {" "}
-      <div
-        className={`w-full min-h-screen lg:px-20 pb-20 mx-auto max-w-[1240px] pt-10 flex lg:gap-5 lg:sticky overflow-y-hidden  ${
-          isVisible ? "mt-20" : 0
-        }`}
-      >
-        {/* Left  */}
-        <div className="hidden no-scrollbar lg:block fixed lg:sticky border-r  border-gray-300 w-[30%] h-[620px] pb-10 overflow-y-auto">
+    <div className="flex mx-auto max-w-[1140px] lg:p-10 ">
+      {/* Left  */}
+      <div className="hidden no-scrollbar lg:block fixed lg:sticky border-r  border-gray-300 w-[30%] h-full pb-10 overflow-y-auto">
+        <LeftFilterBar categoryArr={categoryArr} colorArr={colorArr} />
+      </div>
+
+      {/* Dialog */}
+      {isOpenDialog && (
+        <div
+          ref={dialogRef}
+          className="h-full overflow-auto  no-scrollbar border-slate-300 fixed bg-opacity-90 top-0 bg-slate-50 border-none backdrop-blur-md z-[99] w-[260px] shadow-md p-5"
+        >
           <LeftFilterBar categoryArr={categoryArr} colorArr={colorArr} />
         </div>
+      )}
 
-        {/* Dialog */}
-        {isOpenDialog && (
-          <div
-            ref={dialogRef}
-            className="h-full overflow-auto  no-scrollbar border-slate-300 fixed bg-opacity-90 top-0 bg-slate-50 border-none backdrop-blur-md z-[99] w-[260px] shadow-md p-5"
-          >
-            <LeftFilterBar categoryArr={categoryArr} colorArr={colorArr} />
-          </div>
-        )}
-
-        {/* Right  */}
-        <div
-          className={` ${
-            isOpenDialog ? "blurred pointer-events-none" : ""
-          }  lg:sticky lg:h-dvh h-full lg:overflow-y-auto no-scrollbar lg:px-0 px-6 flex w-full flex-col `}
-        >
-          <ShopRightContent categoryArr={categoryArr} />
-        </div>
+      {/* Right  */}
+      <div
+        className={` ${
+          isOpenDialog ? "blurred pointer-events-none" : ""
+        }   h-full lg:px-0 px-6 flex w-full flex-col `}
+      >
+        <ShopRightContent categoryArr={categoryArr} />
       </div>
     </div>
   );

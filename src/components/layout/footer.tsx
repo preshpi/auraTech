@@ -87,7 +87,7 @@ export const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  to="/category/phone-accessories"
+                  to="/shop?cat=phone-cases"
                   className="text-gray-400 hover:text-white"
                 >
                   Phone Accessories
@@ -95,7 +95,7 @@ export const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/category/laptop-accessories"
+                  to="/shop?cat=laptop-stands"
                   className="text-gray-400 hover:text-white"
                 >
                   Laptop Accessories
@@ -103,7 +103,7 @@ export const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/category/audio-accessories"
+                  to="/shop?cat=noise-canceling-headphones"
                   className="text-gray-400 hover:text-white"
                 >
                   Audio Accessories
@@ -111,7 +111,7 @@ export const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/category/charging-power"
+                  to="/shop?cat=wireless-chargers"
                   className="text-gray-400 hover:text-white"
                 >
                   Charging & Power
@@ -119,7 +119,7 @@ export const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/category/gaming-accessories"
+                  to="/shop?cat=gaming-chairs"
                   className="text-gray-400 hover:text-white"
                 >
                   Gaming Accessories
@@ -146,7 +146,7 @@ export const Footer = () => {
                   size={20}
                   className="mr-2 text-indigo-400 flex-shrink-0"
                 />
-                <span className="text-gray-400">+1 (555) 123-4567</span>
+                <span className="text-gray-400">+234 (555) 123-4567</span>
               </li>
               <li className="flex items-center">
                 <Mail

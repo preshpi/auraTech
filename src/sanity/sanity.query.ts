@@ -54,6 +54,22 @@ export const getCategories = async () => {
   }
 };
 
+//Get New Arrival
+export const getNewArrival = async () => {
+  const query = `*[_type == "newArrival"][0]{
+    _id, title, products[]->${productQuery}
+  
+    }`;
+
+  try {
+    const newArrival = await client.fetch(query);
+    return newArrival;
+  } catch (error) {
+    toast.error((error as { message: string }).message);
+    return [];
+  }
+};
+
 //Get Best Sellers
 export const getBestSellers = async () => {
   const query = `*[_type == "bestSeller"][0]{

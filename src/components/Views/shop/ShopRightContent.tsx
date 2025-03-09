@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { sortingArr } from "../../../utils/categories";
 import Product from "../landing/product";
@@ -19,6 +19,8 @@ interface IShopRightContentProp {
 const ShopRightContent: React.FC<IShopRightContentProp> = ({ categoryArr }) => {
   // HOOKS
   const [showSortBy, setShowSortBy] = React.useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
   const {
     handleSortBy,
     activeFilter,
@@ -49,10 +51,19 @@ const ShopRightContent: React.FC<IShopRightContentProp> = ({ categoryArr }) => {
     if (sorted) handleProducts(sorted);
   };
 
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const paginatedProducts = products.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
-    <div className="w-full">
+    <div className="w-full h-full lg:px-6">
       {/* Link Direction  */}
-      <div className="flex gap-x-2 mb-10 items-center flex-wrap lg:px-5">
+      <div className="flex gap-x-2 my-10 items-center flex-wrap lg:px-5">
         <div className="flex gap-x-3 items-center">
           <Link
             to={"/"}
@@ -102,7 +113,7 @@ const ShopRightContent: React.FC<IShopRightContentProp> = ({ categoryArr }) => {
           {!activeCat ? "all products" : activeCat}
         </p>
 
-        <div className="relative lg:w-[300px] w-full flex items-center z-50">
+        <div className="relative lg:w-[300px] w-full flex items-center">
           <p className="text-base text-black capitalize w-[25%] lg:block hidden">
             sort by:
           </p>
@@ -208,11 +219,29 @@ const ShopRightContent: React.FC<IShopRightContentProp> = ({ categoryArr }) => {
             </div>
           </div>
         ) : (
-          <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-            {products.map((item, index) => (
-              <Product key={index} productData={item} />
-            ))}
-          </div>
+          <>
+            <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+              {paginatedProducts.map((item, index) => (
+                <Product key={index} productData={item} />
+              ))}
+            </div>
+            <div className="flex justify-center gap-x-5 px-4 py-5">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="text-white px-5 py-2 text-base rounded-md cursor-pointer hover:opacity-90 disabled:hover:opacity-100 transition-all duration-300 disabled:cursor-not-allowed disabled:bg-primary-100 bg-primary-400"
+              >
+                Previous
+              </button>
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage * itemsPerPage >= products.length}
+                className="text-white px-5 py-2 text-base rounded-md cursor-pointer hover:opacity-90 disabled:hover:opacity-100 transition-all duration-300 disabled:cursor-not-allowed disabled:bg-primary-100 bg-primary-400"
+              >
+                Next
+              </button>
+            </div>
+          </>
         )}
       </div>
     </div>

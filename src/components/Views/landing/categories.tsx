@@ -60,16 +60,17 @@ const Categories: React.FC<ITopCategoriesProp> = React.memo(
                   to={`/shop?cat=${category.slug.current}`}
                   onMouseEnter={() => setHovered(category._id)}
                   onMouseLeave={() => setHovered(null)}
-                  className="flex flex-col group items-center justify-center bg-[#F9F9F9] rounded-md w-full p-4 h-[300px]"
+                  className="flex flex-col group items-center justify-start bg-[#F9F9F9] rounded-md w-full p-4 h-[320px]"
                 >
                   <img
                     src={urlFor(category.image)}
                     alt={category.name}
-                    className="w-[200px] h-[200px] object-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                    className="w-full h-[200px] object-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
                   />
-                  <div className="flex items-center justify-between w-full pt-4">
+
+                  <div className="flex items-center justify-between w-full py-2">
                     <div className="space-y-2">
-                      <p className="text-2xl mt-2 font-medium heading reversed-link text-xl-3xl tracking-tighter leading-tight group-hover:underline">
+                      <p className="text-2xl font-medium heading reversed-link text-xl-3xl tracking-tighter leading-tight group-hover:underline">
                         {category.name}
                       </p>
                       <p className="leading-none text-xs xl:text-sm">

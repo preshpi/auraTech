@@ -19,7 +19,7 @@ const ProductsParent: React.FunctionComponent<IProductsParentProps> = ({
       </h3>
 
       <div className="flex gap-x-5 items-center w-full">
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-x-5 lg:grid-cols-4 justify-center items-center">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-4 justify-center items-center">
           {products?.map((item, index) => (
             <Product key={index} productData={item} />
           ))}
