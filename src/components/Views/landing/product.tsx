@@ -2,7 +2,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ProductProp } from "../../../types/main/product";
 import { urlFor } from "../../../sanity/sanity";
 import NoImage from "../../general/NoImage";
-import { useUserAuth } from "../../../context/Auth.Context";
 import { FiShoppingBag } from "react-icons/fi";
 import { CiShoppingCart } from "react-icons/ci";
 import { toast } from "sonner";
@@ -10,6 +9,7 @@ import { useAppDispatch } from "../../../hooks/redux.hook";
 import { handleAddToCart } from "../../../redux/slices/cartSlice";
 import Cookies from "js-cookie";
 import { config } from "../../../helper/config";
+import { getAuth } from "firebase/auth";
 
 interface IProductProps {
   productData: ProductProp;
@@ -20,7 +20,9 @@ const buttonStyles =
   "w-[40px] h-[40px] rounded-full bg-[#eee] bg-opacity-80 text-lg flex items-center justify-center cursor-pointer";
 
 const Product = ({ productData }: IProductProps) => {
-  const { user } = useUserAuth();
+  const auth = getAuth();
+  const user = auth.currentUser;
+
   const dispatch = useAppDispatch();
   const router = useNavigate();
   const location = useLocation();

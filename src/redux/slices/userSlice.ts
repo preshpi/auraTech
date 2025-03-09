@@ -4,27 +4,14 @@ import { UserType } from "../../types/auth/user";
 
 // Define a type for the slice state
 interface UserDetailsState {
-  userDetails: UserType;
+  userDetails: UserType | null;
+  isLoggedIn: boolean;
 }
 
 // Define the initial state using that type
 const initialState: UserDetailsState = {
-  userDetails: {
-    _id: "",
-    uid: "",
-    firstname: "",
-    lastname: "",
-    email: "",
-    phone: "",
-    address: "",
-    country: "",
-    state: "",
-    city: "",
-    zipCode: "",
-    image: "",
-    isGoogle: false,
-    emailVerified: false,
-  },
+  isLoggedIn: false,
+  userDetails: null,
 };
 
 const userSlice = createSlice({
@@ -33,12 +20,17 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     handleUserDetails: (state, action: PayloadAction<UserType>) => {
+      state.isLoggedIn = true;
       state.userDetails = action.payload;
+    },
+    logoutUser: (state) => {
+      state.isLoggedIn = false;
+      state.userDetails = null;
     },
   },
 });
 
-export const { handleUserDetails } = userSlice.actions;
+export const { handleUserDetails, logoutUser } = userSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const userDetails = (state: RootState) => state.user;

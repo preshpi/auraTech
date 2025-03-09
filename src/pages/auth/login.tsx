@@ -4,13 +4,12 @@ import { useAppDispatch } from "../../hooks/redux.hook";
 import { useForm } from "react-hook-form";
 import { logInSchema, TlogInSchema } from "../../types/auth/login";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useUserRedirect from "../../hooks/useUserRedirect";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../ui/button";
+import { Button } from "../../components/ui/button";
 import { FcGoogle } from "react-icons/fc";
 import Cookies from "js-cookie";
 import { config } from "../../helper/config";
-import Input from "../ui/input";
+import Input from "../../components/ui/input";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { getUserDetailsFromSanity } from "../../utils/user.requests";
@@ -23,7 +22,6 @@ import {
 
 const Login = () => {
   // HOOKS
-  const { isAuthenticated } = useUserRedirect();
   const [isLoading, startTransition] = React.useTransition();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -36,7 +34,7 @@ const Login = () => {
   } = useForm<TlogInSchema>({ resolver: zodResolver(logInSchema) });
 
   // DECLARES
-  const isLoggedIn = Cookies.get(config.key.userId);
+  // const isLoggedIn = Cookies.get(config.key.userId);
 
   // FUNCTIONS
   const onSubmit = (data: TlogInSchema) => {
@@ -91,18 +89,18 @@ const Login = () => {
   };
 
   // USE EFFECTS
-  React.useEffect(() => {
-    if (isLoggedIn) {
-      const getLastPageVisit = Cookies.get(config.key.lastPath);
-      if (getLastPageVisit) {
-        navigate(getLastPageVisit);
-      } else {
-        navigate("/");
-      }
-    }
-  }, [isLoggedIn]);
+  // React.useEffect(() => {
+  //   if (isLoggedIn) {
+  //     const getLastPageVisit = Cookies.get(config.key.lastPath);
+  //     if (getLastPageVisit) {
+  //       navigate(getLastPageVisit);
+  //     } else {
+  //       navigate("/");
+  //     }
+  //   }
+  // }, [isLoggedIn]);
 
-  return !isAuthenticated ? (
+  return (
     <div className="flex lg:justify-between md:justify-between justify-center min-h-screen w-full">
       <div className="lg:w-1/2 md:w-1/2 w-full h-[100vh] px-5 gap-y-5 bg-[#111111] flex items-center justify-center flex-col text-white">
         <div className="w-full space-y-6 max-w-[426px]">
@@ -196,7 +194,7 @@ const Login = () => {
         />
       </div>
     </div>
-  ) : null;
+  );
 };
 
 export default Login;

@@ -15,6 +15,8 @@ export const createUserOnSanity = async ({
   dispatch,
   navigate,
 }: CreateUserOnSanityProps) => {
+  console.log(userData, "usernfn");
+
   try {
     // Create a user document in Sanity
     const doc = {
@@ -25,6 +27,7 @@ export const createUserOnSanity = async ({
       phone: userData?.phone,
       email: userData?.email,
       uid: userData?.uid,
+      image: userData?.image,
       isGoogle: userData?.isGoogle,
       emailVerified: false, // set initial email verification status
     };
@@ -39,6 +42,7 @@ export const createUserOnSanity = async ({
         lastname: res.lastname,
         email: res.email,
         uid: res.uid,
+        image: res.image,
         phone: res.phone,
         isGoogle: res.isGoogle,
         emailVerified: res.emailVerified,

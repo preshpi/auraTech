@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { Button } from "../ui/button";
-import useUserRedirect from "../../hooks/useUserRedirect";
+import { Button } from "../../components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema, TsignUpSchema } from "../../types/auth/signup";
 import { FcGoogle } from "react-icons/fc";
-import Input from "../ui/input";
+import Input from "../../components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
 import {
   GoogleAuthSignIn,
@@ -22,7 +21,6 @@ import { auth } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Signup = () => {
-  const { isAuthenticated } = useUserRedirect();
   const [isLoading, startTransition] = React.useTransition();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -108,7 +106,7 @@ const Signup = () => {
     });
   };
 
-  return !isAuthenticated ? (
+  return (
     <div className="flex lg:justify-between md:justify-between justify-center min-h-screen w-full">
       <div className="lg:w-1/2 md:w-1/2 w-full h-[100vh] p-5 bg-[#111111] flex items-center justify-center flex-col text-white">
         <div className="w-full lg:space-y-6 space-y-4 max-w-[426px]">
@@ -328,7 +326,7 @@ const Signup = () => {
         />
       </div>
     </div>
-  ) : null;
+  );
 };
 
 export default Signup;
