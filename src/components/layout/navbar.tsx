@@ -299,13 +299,13 @@ const Navbar = () => {
                   </button>
                 ) : (
                   <>
-                    <Link to="/sign-in">
+                    <Link to="/login">
                       <button className="underline focus:none outline-none hover:opacity-75 transition-all duration-300">
                         Log In
                       </button>{" "}
                     </Link>
                     |
-                    <Link to="/sign-up">
+                    <Link to="/signup">
                       <button className="underline focus:none outline-none hover:opacity-75 transition-all duration-300">
                         Sign Up
                       </button>
