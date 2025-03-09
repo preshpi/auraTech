@@ -123,3 +123,16 @@ export const getSimilarProducts = async (categoryName: string | undefined) => {
     return [];
   }
 };
+
+// Search products by name
+export const searchProducts = async (searchTerm: string) => {
+  const query = `*[_type == "product" && product_name match '${searchTerm}*']${productQuery}`;
+
+  try {
+    const products = await client.fetch(query);
+    return products;
+  } catch (error) {
+    toast.error((error as { message: string }).message);
+    return [];
+  }
+};

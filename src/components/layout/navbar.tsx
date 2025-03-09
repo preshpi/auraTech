@@ -1,23 +1,41 @@
 import { LogOut, Menu, Search, User } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CiShoppingCart } from "react-icons/ci";
 import { useAppSelector } from "../../hooks/redux.hook";
 import { useAuth } from "../../hooks/useAuth";
+import { searchProducts } from "../../sanity/sanity.query";
+import { ProductProp } from "../../types/main/product";
 
 const Navbar = () => {
   const [searchInput, setSearchInput] = useState("");
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showSearchResult, setShowSearchResult] = useState<boolean>(false);
+  const [searchResults, setSearchResults] = useState<ProductProp[]>([]);
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
+
   const { isLoggedIn, userDetails: user } = useAppSelector(
     (state) => state.user
   );
   const { logout } = useAuth();
 
-  console.log("User:", user);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
   };
+
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+      if (searchInput.trim() !== "") {
+        const results = await searchProducts(searchInput);
+        setSearchResults(results);
+        setShowSearchResult(true);
+      } else {
+        setShowSearchResult(false);
+      }
+    };
+
+    fetchSearchResults();
+  }, [searchInput]);
 
   const handleLogout = async () => {
     try {
@@ -29,8 +47,8 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-white sticky top-0 z-50">
-      <div className="container mx-auto px-12 py-6">
+    <header className="bg-white sticky shadow top-0 z-50">
+      <div className="container mx-auto px-12 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-3xl font-semibold text-primary-500">
@@ -49,18 +67,38 @@ const Navbar = () => {
               <Search className="text-accent-700" size={16} />
             </div>
 
-            <div className="relative">
+            {showSearchResult && (
+              <div className="absolute bg-white border border-gray-200 rounded-md shadow-lg top-16 w-[300px] z-50">
+                {searchResults.length > 0 ? (
+                  searchResults.map((product) => (
+                    <Link
+                      key={product._id}
+                      to={`/shop/${product._id}`}
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
+                      {product.product_name}
+                    </Link>
+                  ))
+                ) : (
+                  <div className="px-4 py-2 text-gray-700">
+                    No results found
+                  </div>
+                )}
+              </div>
+            )}
+
+            <Link to="/cart" className="relative">
               <button
-                className="p-2 text-gray-700 hover:text-primary-500"
+                className="p-2 text-gray-700 hover:text-primary-500 cursor-pointer"
                 aria-label="Cart"
               >
                 <CiShoppingCart size={25} />
 
                 <span className="absolute -top-1 -right-1 bg-primary-400 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  1
+                  {cartItems}
                 </span>
               </button>
-            </div>
+            </Link>
 
             {isLoggedIn ? (
               <div className="relative">
@@ -71,7 +109,7 @@ const Navbar = () => {
                 >
                   {user?.image ? (
                     <img
-                      src={user.image || "/placeholder.svg"}
+                      src={user.image}
                       alt={user.firstname || "User"}
                       className="w-8 h-8 rounded-full"
                     />
@@ -81,8 +119,8 @@ const Navbar = () => {
                 </button>
 
                 {showUserMenu && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                    <div className="px-4 py-2 text-sm text-gray-700 border-b">
+                  <div className="absolute right-0 mt-2 w-40 border border-accent-200 bg-white rounded-md shadow-lg py-1 z-50">
+                    <div className="px-4 py-2 text-sm text-gray-700 border-b border-accent-200">
                       {user?.firstname || user?.email} {user?.lastname}
                     </div>
                     <button

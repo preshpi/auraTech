@@ -63,7 +63,7 @@ const Product = ({ productData }: IProductProps) => {
     <div className="lg:w-[266px] w-full h-[full] relative lg:rounded-md overflow-hidden">
       {/* Image  */}
       <Link to={`/shop/${productData._id}`}>
-        <div className="w-full h-[300px] overflow-hidden relative z-10 p-2 bg-[#E6E9E8] rounded-md">
+        <div className="w-full h-[300px] overflow-hidden relative z-10 p-2">
           {productData.imgUrl ? (
             <img
               src={urlFor(productData.imgUrl)}

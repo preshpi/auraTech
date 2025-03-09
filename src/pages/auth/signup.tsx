@@ -12,7 +12,7 @@ import {
   signInWithGoogle,
 } from "../../helper/signInWithGoogle";
 import { config } from "../../helper/config";
-import { useAppDispatch } from "../../hooks/redux.hook";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux.hook";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
 import { getErrorMessage } from "../../firebase/errorMapping";
@@ -25,6 +25,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [step, setStep] = useState<number>(1);
+  const { isLoggedIn } = useAppSelector((state) => state.user);
 
   const {
     register,
@@ -35,7 +36,6 @@ const Signup = () => {
   } = useForm<TsignUpSchema>({ resolver: zodResolver(signUpSchema) });
 
   // DECLARES
-  const isLoggedIn = Cookies.get(config.key.userId);
 
   // FUNCTIONS
   const handleGoogleSignIn = async () => {

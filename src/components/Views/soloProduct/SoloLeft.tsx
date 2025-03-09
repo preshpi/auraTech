@@ -89,14 +89,14 @@ const SoloLeft = ({ mainImage, otherImages }: Props) => {
         ))}
       </div>
 
-      <div className="w-full lg:w-[400px] h-[300px] lg:h-[500px] bg-gray-200 rounded-xl overflow-hidden relative">
+      <div className="w-full lg:w-[400px] h-[300px] lg:h-fit rounded-xl overflow-hidden relative">
         {/* {activeImg.id === 0 ? ( */}
         <div className=" w-full h-full relative">
           {activeImg.imageUrl && (
             <img
               src={urlFor(activeImg.imageUrl)}
               alt="other product"
-              className="object-cover"
+              className="object-cover w-fit h-[600px]"
             />
           )}
         </div>

@@ -57,7 +57,7 @@ const Categories: React.FC<ITopCategoriesProp> = React.memo(
             {categoryData.map((category) => (
               <div className="flex-shrink-0 w-[250px] mx-2" key={category._id}>
                 <Link
-                  to={`/category/${category.slug.current}`}
+                  to={`/shop?cat=${category.slug.current}`}
                   onMouseEnter={() => setHovered(category._id)}
                   onMouseLeave={() => setHovered(null)}
                   className="flex flex-col group items-center justify-center bg-[#F9F9F9] rounded-md w-full p-4 h-[300px]"

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import { useAppDispatch } from "../../hooks/redux.hook";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux.hook";
 import { useForm } from "react-hook-form";
 import { logInSchema, TlogInSchema } from "../../types/auth/login";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,7 +34,7 @@ const Login = () => {
   } = useForm<TlogInSchema>({ resolver: zodResolver(logInSchema) });
 
   // DECLARES
-  // const isLoggedIn = Cookies.get(config.key.userId);
+  const { isLoggedIn } = useAppSelector((state) => state.user);
 
   // FUNCTIONS
   const onSubmit = (data: TlogInSchema) => {
@@ -89,16 +89,16 @@ const Login = () => {
   };
 
   // USE EFFECTS
-  // React.useEffect(() => {
-  //   if (isLoggedIn) {
-  //     const getLastPageVisit = Cookies.get(config.key.lastPath);
-  //     if (getLastPageVisit) {
-  //       navigate(getLastPageVisit);
-  //     } else {
-  //       navigate("/");
-  //     }
-  //   }
-  // }, [isLoggedIn]);
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      const getLastPageVisit = Cookies.get(config.key.lastPath);
+      if (getLastPageVisit) {
+        navigate(getLastPageVisit);
+      } else {
+        navigate("/");
+      }
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="flex lg:justify-between md:justify-between justify-center min-h-screen w-full">
