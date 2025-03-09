@@ -1,4 +1,4 @@
-import { ButtonProps } from "../../../types/ui/button.type";
+import { ButtonProps } from "../../types/ui/button.type";
 
 export function Button({
   children,

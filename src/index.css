@@ -1,5 +1,8 @@
 @import "tailwindcss";
-
+html,
+body {
+  font-family: "Author", sans-serif;
+}
 @theme {
   --color-50: #eae9fc;
   --color-100: #d6d2f9;

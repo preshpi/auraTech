@@ -2,7 +2,7 @@
 import React from "react";
 import { useAppDispatch } from "../../hooks/redux.hook";
 import { useForm } from "react-hook-form";
-import { logInSchema, TlogInSchema } from "../../../types/auth/login";
+import { logInSchema, TlogInSchema } from "../../types/auth/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useUserRedirect from "../../hooks/useUserRedirect";
 import { Link, useNavigate } from "react-router-dom";

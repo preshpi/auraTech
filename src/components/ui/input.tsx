@@ -1,6 +1,6 @@
 "use client";
 import { Eye, EyeOff } from "lucide-react";
-import { InputProps } from "../../../types/ui/input.type";
+import { InputProps } from "../../types/ui/input.type";
 import { useState, forwardRef } from "react";
 
 const Input = forwardRef<HTMLInputElement, InputProps>(

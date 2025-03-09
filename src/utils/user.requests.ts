@@ -3,7 +3,7 @@ import {
   CreateUserOnSanityProps,
   GetUserFromSanityProps,
   UserType,
-} from "../../types/auth/user";
+} from "../types/auth/user";
 import Cookies from "js-cookie";
 import { config } from "../helper/config";
 import { toast } from "sonner";
