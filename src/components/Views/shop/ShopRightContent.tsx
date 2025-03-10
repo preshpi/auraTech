@@ -197,7 +197,7 @@ const ShopRightContent: React.FC<IShopRightContentProp> = ({
 
       <div className="w-full">
         {products.length === 0 ? (
-          <div className="w-full h-[250px] flex-col flex items-center justify-center">
+          <div className="w-full h-full py-5 flex-col flex items-center justify-center">
             <Empty
               title="no product found"
               subTitle="Product not found in this category or with the applied filter. Try
