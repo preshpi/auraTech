@@ -15,8 +15,6 @@ export const createUserOnSanity = async ({
   dispatch,
   navigate,
 }: CreateUserOnSanityProps) => {
-  console.log(userData, "usernfn");
-
   try {
     // Create a user document in Sanity
     const doc = {
