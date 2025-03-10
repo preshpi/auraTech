@@ -58,7 +58,7 @@ export const createUserOnSanity = async ({
     // Set user ID cookie
     Cookies.set(config.key.userId, res.uid || res._id); // Adjust to your logic
 
-    toast.success("Form submitted successfully");
+    // toast.success("Form submitted successfully");
     return { success: true };
   } catch (error) {
     toast.error("Failed to create user. Please try again.");

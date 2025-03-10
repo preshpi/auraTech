@@ -1,4 +1,5 @@
 import ShopContent from "../components/Views/shop/ShopContent";
+import { ShopContentSkeleton } from "../components/Views/soloProduct/SkeletonLoader";
 import {
   getAllProducts,
   getCategories,
@@ -16,6 +17,10 @@ const Shop = () => {
     "categories",
     getCategories
   );
+
+  if (isLoading) {
+    return <ShopContentSkeleton />;
+  }
 
   return (
     <ShopContent

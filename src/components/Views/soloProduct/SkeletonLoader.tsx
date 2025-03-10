@@ -56,7 +56,7 @@ export const ProductSkeletonLoader = () => {
   );
 };
 
-const SkeletonProductGrid = () => {
+export const SkeletonProductGrid = () => {
   return (
     <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
       {Array.from({ length: 6 }).map((_, index) => (
@@ -70,4 +70,32 @@ const SkeletonProductGrid = () => {
   );
 };
 
-export default SkeletonProductGrid;
+export const SoloContentSkeleton = () => {
+  return (
+    <div className="w-full h-full py-10 mx-auto max-w-[1240px] px-5 lg:px-20">
+      <div className="animate-pulse">
+        <div className="h-6 bg-gray-300 rounded w-1/3 mb-4"></div>
+        <div className="flex gap-5 lg:flex-row flex-col lg:justify-between justify-center">
+          <div className="h-64  lg:w-1/2 py-3 bg-gray-300 rounded mb-4"></div>
+          <div className="w-full lg:w-1/2 py-3">
+            <div className="h-6 bg-gray-300 rounded mb-4"></div>
+            <div className="h-6 bg-gray-300 rounded mb-4"></div>
+            <div className="h-6 bg-gray-300 rounded mb-4"></div>
+            <div className="h-6 bg-gray-300 rounded mb-4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const ShopContentSkeleton = () => {
+  return (
+    <div className="w-full h-full py-10 mx-auto max-w-[1240px] px-5 lg:px-1">
+      <div className="animate-pulse flex space-x-4">
+        <div className="h-[600px] bg-gray-200 w-96 lg:block hidden"></div>
+        <SkeletonProductGrid />
+      </div>
+    </div>
+  );
+};

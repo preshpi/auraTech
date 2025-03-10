@@ -11,7 +11,7 @@ import Empty from "../../general/Empty";
 import { CategoryProp } from "../../../types/main/product";
 import { Link } from "react-router-dom";
 import { Button } from "../../ui/button";
-import SkeletonProductGrid from "../soloProduct/SkeletonLoader";
+import { SkeletonProductGrid } from "../soloProduct/SkeletonLoader";
 
 interface IShopRightContentProp {
   categoryArr: CategoryProp[];

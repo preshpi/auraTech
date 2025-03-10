@@ -70,11 +70,13 @@ const Categories: React.FC<ITopCategoriesProp> = React.memo(
                       onMouseLeave={() => setHovered(null)}
                       className="flex flex-col group items-center justify-start bg-[#F9F9F9] rounded-md w-full p-4 h-[320px]"
                     >
-                      <img
-                        src={urlFor(category.image)}
-                        alt={category.name}
-                        className="w-full h-[200px] object-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
-                      />
+                      <div className="w-full h-full">
+                        <img
+                          src={urlFor(category.image)}
+                          alt={category.name}
+                          className="w-fit h-[200px] object-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                        />
+                      </div>
 
                       <div className="flex items-center justify-between w-full py-2">
                         <div className="space-y-2">
