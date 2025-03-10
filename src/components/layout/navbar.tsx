@@ -1,5 +1,5 @@
 import { LogOut, Search, User } from "lucide-react";
-import { useState, useEffect, useTransition } from "react";
+import { useState, useEffect, useTransition, useRef } from "react";
 import { Link } from "react-router-dom";
 import { CiSearch, CiShoppingCart } from "react-icons/ci";
 import { useAppSelector } from "../../hooks/redux.hook";
@@ -24,6 +24,9 @@ const Navbar = () => {
   const [isVisible] = useState<boolean>(false);
   const userDetails = useAppSelector((state) => state.user.userDetails);
   const [isLoading, startTransition] = useTransition();
+  const searchRef = useRef<HTMLDivElement>(null);
+  const mobileSearchRef = useRef<HTMLDivElement>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
 
   const { isLoggedIn, userDetails: user } = useAppSelector(
     (state) => state.user
@@ -75,6 +78,39 @@ const Navbar = () => {
     };
   }, [showSidebar]);
 
+  // Handle click outside for search results
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Check desktop search
+      const isOutsideDesktopSearch =
+        searchRef.current && !searchRef.current.contains(event.target as Node);
+
+      // Check mobile search
+      const isOutsideMobileSearch =
+        mobileSearchRef.current &&
+        !mobileSearchRef.current.contains(event.target as Node);
+
+      // Close search results if clicked outside of both search areas
+      if (isOutsideDesktopSearch && isOutsideMobileSearch) {
+        setShowSearchResult(false);
+      }
+
+      // Handle user menu outside clicks
+      if (
+        userMenuRef.current &&
+        !userMenuRef.current.contains(event.target as Node) &&
+        showUserMenu
+      ) {
+        setShowUserMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showUserMenu]);
+
   return (
     <>
       <header className="bg-white sticky top-0 z-50 hidden lg:block">
@@ -86,36 +122,39 @@ const Navbar = () => {
             </Link>
 
             <div className="flex items-center space-x-4">
-              <div className="w-[300px] flex items-center px-5 py-2 bg-accent-50 text-[16px] rounded-md">
-                <input
-                  type="text"
-                  className="focus:outline-hidden w-full placeholder:text-accent-500"
-                  placeholder="Search for products"
-                  value={searchInput}
-                  onChange={handleInputChange}
-                />
-                <Search className="text-accent-700" size={16} />
-              </div>
-
-              {showSearchResult && (
-                <div className="absolute bg-white border border-gray-200 rounded-md shadow-lg top-16 w-[300px] z-50">
-                  {searchResults.length > 0 ? (
-                    searchResults.map((product) => (
-                      <Link
-                        key={product._id}
-                        to={`/shop/${product._id}`}
-                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      >
-                        {product.product_name}
-                      </Link>
-                    ))
-                  ) : (
-                    <div className="px-4 py-2 text-gray-700">
-                      No results found
-                    </div>
-                  )}
+              <div ref={searchRef} className="relative w-[300px]">
+                <div className="flex items-center px-5 py-2 bg-accent-50 text-[16px] rounded-md">
+                  <input
+                    type="text"
+                    className="focus:outline-hidden w-full placeholder:text-accent-500"
+                    placeholder="Search for products"
+                    value={searchInput}
+                    onChange={handleInputChange}
+                  />
+                  <Search className="text-accent-700" size={16} />
                 </div>
-              )}
+
+                {showSearchResult && (
+                  <div className="absolute bg-white border border-gray-200 rounded-md shadow-lg top-full mt-1 w-full z-50">
+                    {searchResults.length > 0 ? (
+                      searchResults.map((product) => (
+                        <Link
+                          key={product._id}
+                          to={`/shop/${product._id}`}
+                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                          onClick={() => setShowSearchResult(false)}
+                        >
+                          {product.product_name}
+                        </Link>
+                      ))
+                    ) : (
+                      <div className="px-4 py-2 text-gray-700">
+                        No results found
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
 
               <Link to="/cart" className="relative">
                 <button
@@ -131,7 +170,7 @@ const Navbar = () => {
               </Link>
 
               {isLoggedIn ? (
-                <div className="relative">
+                <div ref={userMenuRef} className="relative">
                   <button
                     onClick={() => setShowUserMenu(!showUserMenu)}
                     className="p-2 text-gray-700 hover:text-indigo-600 flex items-center"
@@ -208,9 +247,12 @@ const Navbar = () => {
                 </Link>
               </div>
             </div>
-            <div className="flex flex-col items-center justify-center w-full">
+            <div
+              ref={mobileSearchRef}
+              className="flex flex-col items-center justify-center w-full relative"
+            >
               <div
-                className={`w-full border-gray-200 rounded border relative ${
+                className={`w-full border-gray-200 rounded border ${
                   isVisible ? "bg-white" : "bg-gray-100"
                 } flex items-center`}
               >
@@ -227,13 +269,14 @@ const Navbar = () => {
               </div>
               {/* Search Result  */}
               {showSearchResult && (
-                <div className="absolute bg-white border border-gray-200 rounded-md shadow-lg top-26 w-full z-50">
+                <div className="absolute bg-white border border-gray-200 rounded-md shadow-lg top-full mt-1 w-full z-50">
                   {searchResults.length > 0 ? (
                     searchResults.map((product) => (
                       <Link
                         key={product._id}
                         to={`/shop/${product._id}`}
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        onClick={() => setShowSearchResult(false)}
                       >
                         {product.product_name}
                       </Link>
